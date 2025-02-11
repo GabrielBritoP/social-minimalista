@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id         String   @id @default(uuid())
+  content    String
+  created_at DateTime @default(now())
+
+  userId String // Referência ao usuário
+  user   User   @relation(fields: [userId], references: [id]) // Relação com User
+
+  Comment Comment[]
+  Like    Like[]
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  avatar     String?
+  created_at DateTime @default(now())
+
+  posts     Post[] // Relação com Post
+  likes     Like[]
+  comments  Comment[]
+  following Follow[]  @relation("Following")
+  followers Follow[]  @relation("Followers")
+}
+
+model Like {
+  id     String @id @default(uuid())
+  userId String
+  postId String
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId]) // Impede curtidas duplicadas no mesmo post
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  content    String
+  userId     String
+  postId     String
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+}
+
+model Follow {
+  id          String @id @default(uuid())
+  followerId  String
+  followingId String
+
+  follower  User @relation(name: "Followers", fields: [followerId], references: [id])
+  following User @relation(name: "Following", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId]) // Impede seguir a mesma pessoa mais de uma vez
+}
