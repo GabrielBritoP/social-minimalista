@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen items-center justify-center bg-gray-100">
+    <div class="flex h-screen items-center justify-center">
         <div class="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
             <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
 
@@ -29,13 +29,7 @@
                         required
                     />
                 </div>
-
-                <button
-                    type="submit"
-                    class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
-                >
-                    Entrar
-                </button>
+                <ButtonDefault label="Entrar" />
             </form>
 
             <p class="text-center text-sm mt-4">

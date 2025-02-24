@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen items-center justify-center bg-gray-100">
+    <div class="flex h-screen items-center justify-center">
         <div class="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
             <h2 class="text-2xl font-semibold text-center mb-4">Criar Conta</h2>
 
@@ -60,13 +60,10 @@
                 <p v-if="successMessage" class="text-green-500 text-sm mb-2 text-center">
                     {{ successMessage }}
                 </p>
-
-                <button
-                    type="submit"
-                    class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 transition"
-                >
-                    Criar Conta
-                </button>
+                <ButtonDefault
+                    label="Criar conta"
+                    customClass="w-full bg-green-700 text-white p-2 rounded hover:bg-green-900 transition"
+                ></ButtonDefault>
             </form>
 
             <p class="text-center text-sm mt-4">
