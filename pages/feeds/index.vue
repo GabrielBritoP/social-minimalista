@@ -29,7 +29,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-
+definePageMeta({
+    middleware: 'auth',
+});
 const posts = ref([]);
 const newPost = ref('');
 const { $supabase } = useNuxtApp();
